@@ -11,6 +11,14 @@ pipeline {
                 sh "mvn clean compile"
             }
         }
+      stage('SonarQube Analysis') {
+            environment {
+                SONAR_TOKEN = credentials('SONAR_TOKEN')
+            }
+            steps {
+                bat "mvn sonar:sonar -Dsonar.projectKey=rdevlekar-org-devops-training_devops-taining-demo -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_TOKEN}"
+            }   
+        } 
 
         stage('Build') {
             steps {
