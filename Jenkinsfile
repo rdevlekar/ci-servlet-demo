@@ -2,13 +2,13 @@ pipeline {
     agent any
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
+        maven "M2"
     }
 
     stages {
         stage('Compile') {
             steps {
-                sh "mvn clean compile"
+                bat "mvn clean compile"
             }
         }
       stage('SonarQube Analysis') {
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "mvn clean package"
+                bat "mvn clean package"
             }
 
             post {
